@@ -138,6 +138,19 @@ class Image2Video():
         return os.path.join(self.result_dir, f"{prompt_str}.mp4")
 
     def download_model(self):
+        """Skip download if model already exists in expected location"""
+        model_path = os.path.join(
+            './checkpoints/tooncrafter_'+str(self.resolution[1])+'_interp_v1/', 'model.ckpt')
+        absolute_path = os.path.join(
+            '/app/tooncrafter/checkpoints/tooncrafter_'+str(self.resolution[1])+'_interp_v1/', 'model.ckpt')
+
+        # Check if model exists in either location
+        if os.path.exists(model_path) or os.path.exists(absolute_path):
+            print(
+                f"Model found at {model_path if os.path.exists(model_path) else absolute_path}")
+            return
+
+        # Only download if model is not found
         REPO_ID = 'Doubiiu/ToonCrafter'
         filename_list = ['model.ckpt']
         if not os.path.exists('./checkpoints/tooncrafter_'+str(self.resolution[1])+'_interp_v1/'):
