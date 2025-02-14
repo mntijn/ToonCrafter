@@ -122,6 +122,8 @@ class Image2Video():
             if image2 is None:
                 batch_samples = batch_samples[:, :, :, :-1, ...]
             # b,samples,c,t,h,w
+            # Add millisecond precision timestamp
+            timestamp = int(time.time() * 1000)
             prompt_str = prompt.replace(
                 "/", "_slash_") if "/" in prompt else prompt
             prompt_str = prompt_str.replace(
@@ -130,12 +132,13 @@ class Image2Video():
             if len(prompt_str) == 0:
                 prompt_str = 'empty_prompt'
 
-        save_videos(batch_samples, self.result_dir,
-                    filenames=[prompt_str], fps=self.save_fps)
-        print(
-            f"Saved in {prompt_str}. Time used: {(time.time() - start):.2f} seconds")
-        model = model.cpu()
-        return os.path.join(self.result_dir, f"{prompt_str}.mp4")
+            filename = f"{prompt_str}_{timestamp}"
+            save_videos(batch_samples, self.result_dir,
+                        filenames=[filename], fps=self.save_fps)
+            print(
+                f"Saved in {filename}. Time used: {(time.time() - start):.2f} seconds")
+            model = model.cpu()
+            return os.path.join(self.result_dir, f"{filename}.mp4")
 
     def download_model(self):
         """Skip download if model already exists in expected location"""
