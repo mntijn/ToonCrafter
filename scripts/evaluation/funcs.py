@@ -1,4 +1,6 @@
 from PIL import Image
+import torch
+import torchvision
 from einops import rearrange
 from lvdm.models.samplers.ddim import DDIMSampler
 import os
@@ -10,8 +12,6 @@ from decord import VideoReader, cpu
 import cv2
 import time
 
-import torch
-import torchvision
 sys.path.insert(1, os.path.join(sys.path[0], '..', '..'))
 
 
