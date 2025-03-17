@@ -118,7 +118,7 @@ data:
     train:
       target: lvdm.data.webvid.WebVid
       params:
-        data_dir: ../../labeled_dataset  # Path to the labeled dataset
+        data_dir: ../../labeled_dataset/videos  # Path to the labeled dataset
         meta_path: ../../labeled_dataset/metadata.csv  # Path to metadata CSV
         video_length: 16
         frame_stride: 6
