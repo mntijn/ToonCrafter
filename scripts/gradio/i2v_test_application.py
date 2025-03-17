@@ -120,6 +120,7 @@ class Image2Video():
 
             # remove the last frame
             if image2 is None:
+                print("removing last frame (image2 is None)")
                 batch_samples = batch_samples[:, :, :, :-1, ...]
             # b,samples,c,t,h,w
             # Add millisecond precision timestamp
