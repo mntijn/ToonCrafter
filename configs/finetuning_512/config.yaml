@@ -1,5 +1,5 @@
 model:
-  pretrained_checkpoint: checkpoints/tooncrafter_512_interp_v1/model.ckpt
+  pretrained_checkpoint: /home/data_prep/ToonCrafter/checkpoints/tooncrafter_512_interp_v1/model.ckpt
   base_learning_rate: 1.0e-06  # Lower learning rate for finetuning
   scale_lr: False
   target: lvdm.models.ddpm3d.LatentVisualDiffusion
@@ -63,7 +63,7 @@ model:
         fs_condition: true
 
     first_stage_config:
-      target: lvdm.models.autoencoder.AutoencoderKL
+      target: lvdm.models.autoencoder.AutoencoderKL_Dualref
       params:
         embed_dim: 4
         monitor: val/rec_loss
@@ -118,8 +118,8 @@ data:
     train:
       target: lvdm.data.webvid.WebVid
       params:
-        data_dir: ../../labeled_dataset/videos  # Path to the labeled dataset
-        meta_path: ../../labeled_dataset/metadata.csv  # Path to metadata CSV
+        data_dir: /home/data_prep/labeled_dataset  # Path to the labeled dataset
+        meta_path: /home/data_prep/labeled_dataset/metadata.csv  # Path to metadata CSV
         video_length: 16
         frame_stride: 6
         load_raw_resolution: true

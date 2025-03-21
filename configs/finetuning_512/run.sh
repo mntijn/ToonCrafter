@@ -1,11 +1,14 @@
 #!/bin/bash
 
+# Get the absolute path to the ToonCrafter root directory
+TOONCRAFTER_ROOT="/home/data_prep/ToonCrafter"
+
 # args
 name="finetuning_512"
-config_file=configs/${name}/config.yaml
+config_file=${TOONCRAFTER_ROOT}/configs/${name}/config.yaml
 
 # save root dir for logs, checkpoints, tensorboard record, etc.
-save_root="../../outputs"
+save_root="${TOONCRAFTER_ROOT}/../../outputs"
 
 mkdir -p $save_root/$name
 
@@ -20,7 +23,7 @@ echo "Using GPUs: ${GPU_DEVICES}"
 ## run training
 CUDA_VISIBLE_DEVICES=${GPU_DEVICES} python3 -m torch.distributed.launch \
 --nproc_per_node=${NUM_GPUS} --nnodes=1 --master_addr=127.0.0.1 --master_port=12352 --node_rank=0 \
-../../main/trainer.py \
+${TOONCRAFTER_ROOT}/main/trainer.py \
 --base $config_file \
 --train \
 --name $name \
