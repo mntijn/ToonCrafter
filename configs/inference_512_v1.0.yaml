@@ -88,7 +88,7 @@ model:
       target: lvdm.modules.encoders.condition.FrozenOpenCLIPImageEmbedderV2
       params:
         freeze: true
-    
+
     image_proj_stage_config:
       target: lvdm.modules.encoders.resampler.Resampler
       params:
