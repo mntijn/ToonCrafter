@@ -132,7 +132,7 @@ lightning:
   trainer:
     benchmark: True
     accumulate_grad_batches: 4  # Increased for better stability with small datasets
-    max_steps: 20000  # Reduced for finetuning
+    max_steps: 3000  # Reduced for finetuning
     log_every_n_steps: 50
     val_check_interval: 0.5
     gradient_clip_algorithm: 'norm'
@@ -141,7 +141,7 @@ lightning:
     model_checkpoint:
       target: pytorch_lightning.callbacks.ModelCheckpoint
       params:
-        every_n_train_steps: 1000  # Save checkpoints more frequently
+        every_n_train_steps: 500  # Save checkpoints more frequently
         filename: "{epoch}-{step}"
         save_weights_only: True
     metrics_over_trainsteps_checkpoint:
@@ -149,7 +149,7 @@ lightning:
       params:
         filename: '{epoch}-{step}'
         save_weights_only: True
-        every_n_train_steps: 5000  # More frequent checkpoints
+        every_n_train_steps: 1000  # More frequent checkpoints
     batch_logger:
       target: callbacks.ImageLogger
       params:
